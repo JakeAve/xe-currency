@@ -1,0 +1,5 @@
+# XE Currency
+
+```
+npm i
+```

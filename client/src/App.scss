@@ -1,0 +1,32 @@
+:root {
+  --sans-serif: 'Inria Sans', sans-serif;
+  --serif: 'Roboto Slab', serif;
+  --cc-1: #0f0f0f;
+  --fc-1: #25aa00;
+  --fc-2: #197700;
+  --fc-3: #219900;
+  --fc-4: #5b9a49;
+  --bg-1: #f5f5f5;
+  --bg-2: #acacac;
+  --warn: #ffa600;
+  --bor-rad: 16px;
+
+  --shadow-1: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  font-family: var(--sans-serif);
+  color: var(--cc-1);
+}
+
+main {
+  width: 80vw;
+  margin: auto;
+  box-shadow: var(--shadow-1);
+}
