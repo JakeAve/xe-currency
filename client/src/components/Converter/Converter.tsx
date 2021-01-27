@@ -1,50 +1,25 @@
-import { useState, MouseEvent, useEffect } from 'react';
-import getRate from '../../actions/getRate';
+import { useState, useEffect } from 'react';
 import makeRelDate from '../../actions/makeRelDate';
-import Selector from '../CurrencySelector/CurrencySelector';
 
 interface Props {
   identifier: string;
-  defaultRate?: number;
-  lastUpdated?: Date;
+  baseCurrency: CurrencyCode;
+  quoteCurrency: CurrencyCode;
+  exchangeRate: ExchangeRate;
+  fee?: number;
+  base?: number;
 }
 
 const Converter = (props: Props): JSX.Element => {
-  const { identifier = 'main', defaultRate = 0, lastUpdated = new Date() } = props;
+  const { identifier = 'main', exchangeRate } = props;
 
-  const [base, setBase] = useState<number | string>(1);
-  const [fee, setFee] = useState<number | string>(0);
-  const [baseCurrency, setBaseCurrency] = useState<CurrencyCode>('USD');
-  const [quoteCurrency, setQuoteCurrency] = useState<CurrencyCode>('EUR');
-  const [exchangeRate, setExchangeRate] = useState<ExchangeRate>({ rate: defaultRate, date: lastUpdated });
+  const [base, setBase] = useState<number | string>(props.base || 1);
+  const [fee, setFee] = useState<number | string>(props.fee || 0);
   const [quote, setQuote] = useState<number | string>(Number(base) * exchangeRate.rate * (1 + Number(fee)));
 
   useEffect(() => {
-    const foo = async () => {
-      setBaseCurrency(quoteCurrency);
-      setQuoteCurrency(baseCurrency);
-      const r = await getRate(baseCurrency, quoteCurrency);
-      setExchangeRate(r);
-      setQuote(Number(base) * r.rate * (1 + Number(fee)));
-    };
-    foo();
-  }, []);
-
-  const updateBaseCurrency = async (e: { target: HTMLSelectElement }) => {
-    const value = e.target.value;
-    setBaseCurrency(value as CurrencyCode);
-    const r = await getRate(value as CurrencyCode, quoteCurrency);
-    setExchangeRate(r);
-    setQuote(Number(base) * r.rate * (1 + Number(fee)));
-  };
-
-  const updateQuoteCurrency = async (e: { target: HTMLSelectElement }) => {
-    const value = e.target.value;
-    setQuoteCurrency(value as CurrencyCode);
-    const r = await getRate(baseCurrency, value as CurrencyCode);
-    setExchangeRate(r);
-    setQuote(Number(base) * r.rate * (1 + Number(fee)));
-  };
+    setQuote(Number(base) * exchangeRate.rate * (1 + Number(fee)));
+  }, [exchangeRate]);
 
   const onBaseChange = (e: { target: HTMLInputElement }) => {
     const value = e.target.value;
@@ -64,41 +39,8 @@ const Converter = (props: Props): JSX.Element => {
     setQuote(Number(base) * exchangeRate.rate * (1 + Number(value)));
   };
 
-  const switchCurrs = async (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setBaseCurrency(quoteCurrency);
-    setQuoteCurrency(baseCurrency);
-    const r = await getRate(baseCurrency, quoteCurrency);
-    setExchangeRate(r);
-    setQuote(Number(base) * r.rate * (1 + Number(fee)));
-  };
-
   return (
-    <form
-      className={(identifier === 'main' ? 'main-converter ' : '') + 'convert-form'}
-      id={identifier + '-converter-form'}
-    >
-      <div className="base-curr selector-wrapper">
-        <label htmlFor={identifier + '-base-curr'}>Base Currency</label>
-        <Selector
-          id={identifier + '-base-curr'}
-          currency={baseCurrency}
-          setCurrency={updateBaseCurrency}
-          name="base-currency"
-        />
-      </div>
-      <button className="switch-btn" onClick={switchCurrs}>
-        Switch
-      </button>
-      <div className="quote-curr selector-wrapper">
-        <label htmlFor={identifier + '-quote-curr'}>Quote Currency</label>
-        <Selector
-          id={identifier + '-quote-curr'}
-          currency={quoteCurrency}
-          setCurrency={updateQuoteCurrency}
-          name="quote-currency"
-        />
-      </div>
+    <form className="convert-form" id={identifier + '-converter-form'}>
       <div className="lg-input-wrapper base">
         <label htmlFor={identifier + '-base'}>Base</label>
         <input

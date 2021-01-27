@@ -11,7 +11,7 @@ interface Props {
 }
 
 const Selector = (props: Props): JSX.Element => {
-  const { id, setCurrency, currency, name, className } = props;
+  const { id, setCurrency, currency, name, className = '' } = props;
   const [availableCurrencies, setAvailableCurrencies] = useState<Array<Currency>>([]);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const Selector = (props: Props): JSX.Element => {
   ));
 
   return (
-    <select id={id} onChange={setCurrency} value={currency} name={name} className={className}>
+    <select className={'currency-select ' + className} id={id} onChange={setCurrency} value={currency} name={name}>
       {options}
     </select>
   );
