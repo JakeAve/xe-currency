@@ -2,7 +2,7 @@ import './styles.scss';
 
 interface Props {
   id: string;
-  currency: string;
+  currency: Currency;
   availableCurrencies: Array<Currency>;
   setCurrency: (e: { target: HTMLSelectElement }) => void;
   name?: string;
@@ -19,7 +19,7 @@ const Selector = (props: Props): JSX.Element => {
   ));
 
   return (
-    <select className={'currency-select ' + className} id={id} onChange={setCurrency} value={currency} name={name}>
+    <select className={'currency-select ' + className} id={id} onChange={setCurrency} value={currency.code} name={name}>
       {options}
     </select>
   );

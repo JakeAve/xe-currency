@@ -1,5 +1,5 @@
 import './styles.scss';
-import { useState, useEffect, MouseEvent } from 'react';
+import { useState, useEffect, MouseEvent, useRef } from 'react';
 import getRate from '../../actions/getRate';
 import getAvailableCurrencies from '../../actions/getAvailableCurrencies';
 import Converter from '../Converter/Converter';
@@ -8,8 +8,12 @@ import Selector from '../CurrencySelector/CurrencySelector';
 const MainConverter = (): JSX.Element => {
   const identifier = 'main';
 
-  const [baseCurrency, setBaseCurrency] = useState<CurrencyCode>('USD');
-  const [quoteCurrency, setQuoteCurrency] = useState<CurrencyCode>('EUR');
+  const [baseCurrency, setBaseCurrency] = useState<Currency>({
+    name: 'United States Dollar',
+    code: 'USD',
+    symbol: '$',
+  });
+  const [quoteCurrency, setQuoteCurrency] = useState<Currency>({ name: 'Euro', code: 'EUR', symbol: '€' });
   const [exchangeRate, setExchangeRate] = useState<ExchangeRate>({ rate: 0, date: new Date() });
   const [availableCurrencies, setAvailableCurrencies] = useState<Array<Currency>>([]);
 
@@ -23,28 +27,28 @@ const MainConverter = (): JSX.Element => {
   };
 
   useEffect(() => {
-    setBaseCurrency(baseCurrency);
-    setQuoteCurrency(quoteCurrency);
-    updateExchangeRate(baseCurrency, quoteCurrency);
+    updateExchangeRate(baseCurrency.code, quoteCurrency.code);
   }, []);
 
   const updateBaseCurrency = (e: { target: HTMLSelectElement }) => {
     const value = e.target.value;
-    setBaseCurrency(value as CurrencyCode);
-    updateExchangeRate(value as CurrencyCode, quoteCurrency);
+    const newBase = availableCurrencies.find((c) => c.code === value);
+    setBaseCurrency(newBase as Currency);
+    updateExchangeRate((newBase as Currency).code, quoteCurrency.code);
   };
 
   const updateQuoteCurrency = (e: { target: HTMLSelectElement }) => {
     const value = e.target.value;
-    setQuoteCurrency(value as CurrencyCode);
-    updateExchangeRate(baseCurrency, value as CurrencyCode);
+    const newQuote = availableCurrencies.find((c) => c.code === value);
+    setQuoteCurrency(newQuote as Currency);
+    updateExchangeRate(baseCurrency.code, (newQuote as Currency).code);
   };
 
   const switchCurrs = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setBaseCurrency(quoteCurrency);
     setQuoteCurrency(baseCurrency);
-    updateExchangeRate(quoteCurrency, baseCurrency);
+    updateExchangeRate(quoteCurrency.code, baseCurrency.code);
   };
 
   const converterProps = {

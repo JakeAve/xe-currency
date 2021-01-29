@@ -103,6 +103,7 @@
 .lg-input-wrapper {
   display: grid;
   grid-template-rows: auto 1fr;
+  gap: 0.5rem;
   padding: 1rem;
   border-radius: var(--bor-rad);
   & input {

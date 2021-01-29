@@ -3,15 +3,15 @@ import makeRelDate from '../../actions/makeRelDate';
 
 interface Props {
   identifier: string;
-  baseCurrency: CurrencyCode;
-  quoteCurrency: CurrencyCode;
+  baseCurrency: Currency;
+  quoteCurrency: Currency;
   exchangeRate: ExchangeRate;
   fee?: number;
   base?: number;
 }
 
 const Converter = (props: Props): JSX.Element => {
-  const { identifier = 'main', exchangeRate } = props;
+  const { identifier = 'main', exchangeRate, baseCurrency, quoteCurrency } = props;
 
   const [base, setBase] = useState<number | string>(props.base || 1);
   const [fee, setFee] = useState<number | string>(props.fee || 0);
@@ -40,10 +40,12 @@ const Converter = (props: Props): JSX.Element => {
     setQuote(Number(base) * exchangeRate.rate * (1 + Number(value)));
   };
 
+  const displayName = (currency: Currency) => `${currency.code} (${currency.symbol})`;
+
   return (
     <form className={'convert-form' + (Number(fee) > 0 ? ' with-fee' : '')} id={identifier + '-converter-form'}>
       <div className="lg-input-wrapper base">
-        <label htmlFor={identifier + '-base'}>Base</label>
+        <label htmlFor={identifier + '-base'}>{displayName(baseCurrency)}</label>
         <input
           name="base"
           type="number"
@@ -54,7 +56,7 @@ const Converter = (props: Props): JSX.Element => {
         />
       </div>
       <div className="lg-input-wrapper quote">
-        <label htmlFor={identifier + '-quote'}>Quote</label>
+        <label htmlFor={identifier + '-quote'}>{displayName(quoteCurrency)}</label>
         <input
           name="quote"
           type="number"
