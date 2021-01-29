@@ -6,7 +6,7 @@ interface Protocol {
     url: string,
     options: { method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'; headers?: object; body?: object },
     callback?: (res: any) => void,
-  ) => Request;
+  ) => { on: (event: string, param2: any) => any; end: () => void };
 }
 
 const protocol = (input: string): Protocol => {
