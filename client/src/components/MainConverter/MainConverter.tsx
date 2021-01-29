@@ -1,6 +1,7 @@
 import './styles.scss';
 import { useState, useEffect, MouseEvent } from 'react';
 import getRate from '../../actions/getRate';
+import getAvailableCurrencies from '../../actions/getAvailableCurrencies';
 import Converter from '../Converter/Converter';
 import Selector from '../CurrencySelector/CurrencySelector';
 
@@ -10,15 +11,10 @@ const MainConverter = (): JSX.Element => {
   const [baseCurrency, setBaseCurrency] = useState<CurrencyCode>('USD');
   const [quoteCurrency, setQuoteCurrency] = useState<CurrencyCode>('EUR');
   const [exchangeRate, setExchangeRate] = useState<ExchangeRate>({ rate: 0, date: new Date() });
+  const [availableCurrencies, setAvailableCurrencies] = useState<Array<Currency>>([]);
 
   useEffect(() => {
-    const foo = async () => {
-      setBaseCurrency(quoteCurrency);
-      setQuoteCurrency(baseCurrency);
-      const r = await getRate(baseCurrency, quoteCurrency);
-      setExchangeRate(r);
-    };
-    foo();
+    getAvailableCurrencies().then((availables) => setAvailableCurrencies(availables));
   }, []);
 
   const updateExchangeRate = async (b: CurrencyCode, q: CurrencyCode) => {
@@ -26,19 +22,25 @@ const MainConverter = (): JSX.Element => {
     setExchangeRate(r);
   };
 
-  const updateBaseCurrency = async (e: { target: HTMLSelectElement }) => {
+  useEffect(() => {
+    setBaseCurrency(baseCurrency);
+    setQuoteCurrency(quoteCurrency);
+    updateExchangeRate(baseCurrency, quoteCurrency);
+  }, []);
+
+  const updateBaseCurrency = (e: { target: HTMLSelectElement }) => {
     const value = e.target.value;
     setBaseCurrency(value as CurrencyCode);
     updateExchangeRate(value as CurrencyCode, quoteCurrency);
   };
 
-  const updateQuoteCurrency = async (e: { target: HTMLSelectElement }) => {
+  const updateQuoteCurrency = (e: { target: HTMLSelectElement }) => {
     const value = e.target.value;
     setQuoteCurrency(value as CurrencyCode);
     updateExchangeRate(baseCurrency, value as CurrencyCode);
   };
 
-  const switchCurrs = async (e: MouseEvent<HTMLButtonElement>) => {
+  const switchCurrs = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setBaseCurrency(quoteCurrency);
     setQuoteCurrency(baseCurrency);
@@ -62,6 +64,7 @@ const MainConverter = (): JSX.Element => {
             currency={baseCurrency}
             setCurrency={updateBaseCurrency}
             name="base-currency"
+            availableCurrencies={availableCurrencies}
           />
         </div>
         <button className="switch-btn" onClick={switchCurrs}>
@@ -74,6 +77,7 @@ const MainConverter = (): JSX.Element => {
             currency={quoteCurrency}
             setCurrency={updateQuoteCurrency}
             name="quote-currency"
+            availableCurrencies={availableCurrencies}
           />
         </div>
       </fieldset>

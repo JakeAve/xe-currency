@@ -1,22 +1,16 @@
 import './styles.scss';
-import { useState, useEffect } from 'react';
-import getAvailableCurrencies from '../../actions/getAvailableCurrencies';
 
 interface Props {
   id: string;
   currency: string;
+  availableCurrencies: Array<Currency>;
   setCurrency: (e: { target: HTMLSelectElement }) => void;
   name?: string;
   className?: string;
 }
 
 const Selector = (props: Props): JSX.Element => {
-  const { id, setCurrency, currency, name, className = '' } = props;
-  const [availableCurrencies, setAvailableCurrencies] = useState<Array<Currency>>([]);
-
-  useEffect(() => {
-    getAvailableCurrencies().then((availables) => setAvailableCurrencies(availables));
-  }, []);
+  const { id, setCurrency, currency, name, className = '', availableCurrencies } = props;
 
   const options = availableCurrencies.map(({ code, name }) => (
     <option key={code} value={code}>

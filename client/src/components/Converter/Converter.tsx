@@ -18,29 +18,30 @@ const Converter = (props: Props): JSX.Element => {
   const [quote, setQuote] = useState<number | string>(Number(base) * exchangeRate.rate * (1 + Number(fee)));
 
   useEffect(() => {
-    setQuote(Number(base) * exchangeRate.rate * (1 + Number(fee)));
+    setQuote((Number(base) * exchangeRate.rate * (1 + Number(fee))).toFixed(4));
   }, [exchangeRate]);
 
   const onBaseChange = (e: { target: HTMLInputElement }) => {
     const value = e.target.value;
     setBase(value);
-    setQuote(Number(value) * exchangeRate.rate * (1 + Number(fee)));
+    setQuote((Number(value) * exchangeRate.rate * (1 + Number(fee))).toFixed(4));
   };
 
   const onQuoteChange = (e: { target: HTMLInputElement }) => {
     const value = e.target.value;
     setQuote(value);
-    setBase((Number(value) / exchangeRate.rate) * (1 - Number(fee)));
+    setBase(((Number(value) / exchangeRate.rate) * (1 - Number(fee))).toFixed(4));
   };
 
   const onFeeChange = (e: { target: HTMLInputElement }) => {
-    const value = e.target.value;
+    const raw = e.target.value;
+    const value = Number(raw) / 100;
     setFee(value);
     setQuote(Number(base) * exchangeRate.rate * (1 + Number(value)));
   };
 
   return (
-    <form className="convert-form" id={identifier + '-converter-form'}>
+    <form className={'convert-form' + (Number(fee) > 0 ? ' with-fee' : '')} id={identifier + '-converter-form'}>
       <div className="lg-input-wrapper base">
         <label htmlFor={identifier + '-base'}>Base</label>
         <input
@@ -65,16 +66,7 @@ const Converter = (props: Props): JSX.Element => {
       </div>
       <div className="fee">
         <label htmlFor={identifier + '-fee'}>Fee</label>
-        <input
-          name="fee"
-          type="number"
-          min="0"
-          max="1"
-          step=".01"
-          id={identifier + '-fee'}
-          value={fee}
-          onChange={onFeeChange}
-        />
+        <input name="fee" type="number" step=".01" id={identifier + '-fee'} onChange={onFeeChange} placeholder="0" />
       </div>
       <div className="date">Last updated {makeRelDate(exchangeRate.date)}</div>
     </form>
