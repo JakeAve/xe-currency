@@ -8,7 +8,6 @@ GET http://localhost:5000/api/convert?base=USD&quote=GBP
 
 GET http://localhost:5000/api/convert?base=ISK&quote=PLN
  
- 
 ###
 
 GET http://localhost:5000/api/currencies

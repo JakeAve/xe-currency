@@ -1,6 +1,9 @@
 .main-converter {
   display: grid;
   gap: 0.5rem;
+  border-radius: var(--bor-rad);
+  box-shadow: var(--shadow-1);
+  padding: 1rem 0;
 
   & fieldset {
     border: none;
@@ -32,8 +35,6 @@
 }
 
 .selector-wrapper {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
   text-align: center;
 }
 
@@ -59,9 +60,38 @@
   & .quote {
     grid-area: q;
   }
+  & .fee,
+  & .date {
+    padding: 0.5rem;
+    font-size: 1.1rem;
+  }
   & .fee {
     grid-area: f;
     justify-self: center;
+    border-radius: var(--bor-rad);
+    & input {
+      width: 3rem;
+      letter-spacing: 0.1rem;
+      margin: 0 0.2rem;
+    }
+    &::after {
+      content: '%';
+    }
+    &:focus-within {
+      background: var(--warn);
+      & input {
+        background: var(--warn);
+        outline: none;
+        &::placeholder {
+          color: var(--bg-1);
+        }
+      }
+      & label,
+      & input,
+      &::after {
+        color: var(--bg-1);
+      }
+    }
   }
   & .date {
     grid-area: d;
@@ -73,6 +103,7 @@
 .lg-input-wrapper {
   display: grid;
   grid-template-rows: auto 1fr;
+  gap: 0.5rem;
   padding: 1rem;
   border-radius: var(--bor-rad);
   & input {
@@ -85,11 +116,24 @@
   }
   &:focus-within {
     background: var(--fc-1);
+    & label,
     & input {
-      color: var(--bg-1);
-      &::placeholder {
-        color: var(--bg-2);
-      }
+      color: var(--bg-1) !important;
+    }
+    & input ::placeholder {
+      color: var(--bg-2);
+    }
+  }
+}
+
+.with-fee {
+  & .quote,
+  & .fee {
+    & label,
+    & input,
+    &::after {
+      color: var(--warn);
+      font-style: italic;
     }
   }
 }
