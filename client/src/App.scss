@@ -11,13 +11,23 @@
   --warn: #ffa600;
   --bor-rad: 16px;
 
-  --shadow-1: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+  /* --shadow-1: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px; */
+  --shadow-1: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+  --fs-1: 1.4rem;
 }
 
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
+  background: linear-gradient(
+    49deg,
+    rgba(37, 170, 0, 1) 7%,
+    rgba(72, 187, 39, 1) 38%,
+    rgba(110, 205, 82, 1) 76%,
+    rgba(112, 238, 104, 1) 100%
+  );
 }
 
 * {
@@ -25,7 +35,14 @@ body {
   color: var(--cc-1);
 }
 
+#root {
+  overflow: hidden;
+}
+
 main {
-  width: 80vw;
   margin: auto;
+  width: 95vw;
+  @media (min-width: 600px) {
+    width: 80vw;
+  }
 }

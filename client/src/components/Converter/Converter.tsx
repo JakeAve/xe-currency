@@ -37,7 +37,7 @@ const Converter = (props: Props): JSX.Element => {
     const raw = e.target.value;
     const value = Number(raw) / 100;
     setFee(value);
-    setQuote(Number(base) * exchangeRate.rate * (1 + Number(value)));
+    setQuote((Number(base) * exchangeRate.rate * (1 + Number(value))).toFixed(4));
   };
 
   const displayName = (currency: Currency) => `${currency.code} (${currency.symbol})`;

@@ -16,7 +16,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "typescript": "^4.1.3",
-    "web-vitals": "^0.2.4",    "workbox-background-sync": "^5.1.3",
+    "web-vitals": "^0.2.4",
+    "workbox-background-sync": "^5.1.3",
     "workbox-broadcast-update": "^5.1.3",
     "workbox-cacheable-response": "^5.1.3",
     "workbox-core": "^5.1.3",
@@ -54,6 +55,7 @@
     ]
   },
   "devDependencies": {
+    "prettier-eslint": "^12.0.0",
     "sass": "^1.30.0"
   },
   "proxy": "http://127.0.0.1:5000"
