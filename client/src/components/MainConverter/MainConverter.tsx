@@ -1,5 +1,5 @@
 import './styles.scss';
-import { useState, useEffect, MouseEvent, useRef } from 'react';
+import { useState, useEffect, MouseEvent } from 'react';
 import getRate from '../../actions/getRate';
 import getAvailableCurrencies from '../../actions/getAvailableCurrencies';
 import Converter from '../Converter/Converter';
