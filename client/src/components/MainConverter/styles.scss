@@ -1,8 +1,8 @@
 .main-converter {
   margin-top: 2.5rem;
   padding: 1rem;
-  // backdrop-filter: brightness(90%);
-  background-color: white;
+  -webkit-backdrop-filter: blur(90px) brightness(115%);
+  backdrop-filter: blur(90px) brightness(115%);
   display: grid;
   gap: 0.5rem;
   border-radius: var(--bor-rad);
@@ -25,14 +25,39 @@
     font-size: var(--fs-1);
     border: none;
     text-align: center;
+
+    &[type='number']::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+
+    &::placeholder {
+      color: var(--fc-1);
+    }
   }
 
   & select {
     width: 100%;
+    text-align-last: center;
+    border-radius: var(--bor-rad);
+    padding: 0.5rem 0.7rem;
+    &:focus,
+    &:hover {
+      outline: none;
+    }
   }
 
+  // > * {
+  //   position: relative;
+  //   &::after {
+  //     content: '';
+  //     border-top: 1px solid var(--bg-2);
+  //     width: 90%;
+  //     left: 5%;
+  //   }
+  // }
+
   @media (max-width: 400px) {
-    padding: 0;
+    padding: 1rem 0;
   }
 }
 
@@ -48,10 +73,44 @@
 .switch-btn {
   border: none;
   background: transparent;
-  backdrop-filter: brightness(110%);
   border-radius: var(--bor-rad);
   font-size: var(--fs-1);
-  padding: 0.5rem;
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 6rem;
+  cursor: pointer;
+  & svg {
+    fill: var(--cc-1);
+    height: var(--fs-1);
+    @media (max-width: 400px) {
+      transform: rotate(90deg);
+    }
+  }
+  &::after {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: var(--bg-1);
+    opacity: 0.4;
+    left: 0;
+    top: 0;
+  }
+  &:hover,
+  &:focus {
+    &::after {
+      opacity: 0.6;
+    }
+  }
+  &:active::after {
+    opacity: 0.8;
+  }
 }
 
 .selector-wrapper {
@@ -67,11 +126,14 @@
 .main-converter {
   & .convert-form {
     display: grid;
+    justify-content: space-around;
+    gap: 1rem;
     grid-template-areas:
-      'b b'
-      'q q'
-      'f f'
-      'd d';
+      'b'
+      'q'
+      'f'
+      'd';
+
     @media (min-width: 810px) {
       grid-template-areas:
         'b q'
@@ -95,6 +157,7 @@
     grid-area: f;
     justify-self: center;
     border-radius: var(--bor-rad);
+    padding: 1.2rem;
     & input {
       width: 3rem;
       letter-spacing: 0.1rem;
@@ -124,17 +187,21 @@
     grid-area: d;
     justify-self: center;
     text-align: center;
+    padding: 1.2rem;
   }
 }
 
 .lg-input-wrapper {
   display: grid;
+  justify-content: center;
   grid-template-rows: auto 1fr;
   gap: 0.5rem;
-  padding: 1rem;
+  padding: 1.2rem;
   border-radius: var(--bor-rad);
+  position: relative;
+  overflow: hidden;
   & input {
-    font-size: 2rem;
+    font-size: var(--fs-2);
     background: transparent;
     &:focus {
       border: none;
@@ -142,7 +209,6 @@
     }
   }
   &:focus-within {
-    background: var(--fc-1);
     & label,
     & input {
       color: var(--bg-1) !important;
@@ -150,6 +216,18 @@
     & input ::placeholder {
       color: var(--bg-2);
     }
+    &::after {
+      background: var(--cc-1);
+    }
+  }
+  &::after {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: var(--bg-1);
+    opacity: 0.4;
   }
 }
 

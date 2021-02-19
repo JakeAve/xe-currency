@@ -3,17 +3,27 @@
   --serif: 'Roboto Slab', serif;
   --cc-1: #0f0f0f;
   --fc-1: #25aa00;
-  --fc-2: #197700;
-  --fc-3: #219900;
-  --fc-4: #5b9a49;
+  --fc-2: #48bb27;
+  --fc-3: #6fcd52;
+  --fc-4: #71ee68;
   --bg-1: #f5f5f5;
   --bg-2: #acacac;
-  --warn: #ffa600;
+  --warn: #cc6d00;
   --bor-rad: 16px;
+  --main-gradient: linear-gradient(49deg, var(--fc-1) 7%, var(--fc-2) 38%, var(--fc-3) 76%, var(--fc-4) 100%);
 
   /* --shadow-1: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px; */
   --shadow-1: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
   --fs-1: 1.4rem;
+  --fs-2: 2rem;
+  @media (max-width: 400px) {
+    --fs-1: 1.2rem;
+    --fs-2: 1.5rem;
+  }
+}
+
+html {
+  background: var(--fc-1);
 }
 
 body {
@@ -21,13 +31,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
-  background: linear-gradient(
-    49deg,
-    rgba(37, 170, 0, 1) 7%,
-    rgba(72, 187, 39, 1) 38%,
-    rgba(110, 205, 82, 1) 76%,
-    rgba(112, 238, 104, 1) 100%
-  );
+  background: var(--main-gradient);
 }
 
 * {
@@ -36,7 +40,7 @@ body {
 }
 
 #root {
-  overflow: hidden;
+  overflow-x: hidden;
   height: 100vh;
   width: 100vw;
 }
