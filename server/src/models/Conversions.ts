@@ -1,13 +1,8 @@
-import { Schema, model } from 'mongoose';
-import { CurrencyCodeSchema } from './CurrencyCode';
+import { Schema, model } from 'mongoose'
 
-const CurrenciesSchema = new Schema({
-  rates: [
-    {
-      type: CurrencyCodeSchema,
-    },
-  ],
+const ConversionsSchema = new Schema({
+  conversions: {},
   date: Date,
-});
+})
 
-export const Currencies = model('currencies', CurrenciesSchema);
+export const Conversions = model('conversions', ConversionsSchema)

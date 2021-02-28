@@ -1,11 +1,11 @@
-import { Router } from 'express';
+import { Router } from 'express'
 
-import convert from './routes/convert';
-import currencies from './routes/currencies';
+import convert from './routes/convert'
+import currencies from './routes/currencies'
 
-const router = Router();
+const router = Router()
 
-router.use('/convert', convert);
-router.use('/currencies', currencies);
+router.use('/convert', convert)
+router.use('/currencies', currencies)
 
-export default router;
+export default router

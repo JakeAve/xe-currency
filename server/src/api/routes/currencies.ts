@@ -1,18 +1,17 @@
-import { Router } from 'express';
-import fs from 'fs';
+import { Router } from 'express'
+import { Currencies } from '../../models/Currencies'
 
-const router = Router();
+const router = Router()
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   try {
-    const files = fs.readdirSync('./src/data/currencies');
-    const fileName = files.slice(-1);
-    const currencies = require(`../../data/currencies/${fileName}`);
-    res.json({ currencies });
+    const curr = await Currencies.findOne().sort({ created_at: -1 }).exec()
+    const currencies = curr['currencies']
+    res.json({ currencies })
   } catch (err) {
-    console.error(err);
-    res.sendStatus(500);
+    console.error(err)
+    res.sendStatus(500)
   }
-});
+})
 
-export default router;
+export default router
