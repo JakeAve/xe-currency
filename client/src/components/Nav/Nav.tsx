@@ -6,7 +6,7 @@ const Home = (): JSX.Element => {
     <nav>
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/">XE-Currency</Link>
         </li>
       </ul>
     </nav>

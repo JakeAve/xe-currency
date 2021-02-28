@@ -1,0 +1,12 @@
+footer {
+  padding: 5rem 0 1.5rem 0;
+  background: var(--fc-1);
+  @media (min-width: 400px) {
+    padding: 5rem 0 2.5rem 0;
+  }
+}
+
+.copyright {
+  color: var(--bg-1);
+  text-align: center;
+}

@@ -1,9 +1,10 @@
 import './styles.scss';
-import { useState, useEffect, MouseEvent } from 'react';
+import { useState, useEffect, MouseEvent, useRef } from 'react';
 import getRate from '../../actions/getRate';
 import getAvailableCurrencies from '../../actions/getAvailableCurrencies';
 import Converter from '../Converter/Converter';
 import Selector from '../CurrencySelector/CurrencySelector';
+import rotateElement from '../../actions/rotateElement';
 
 const MainConverter = (): JSX.Element => {
   const identifier = 'main';
@@ -16,6 +17,7 @@ const MainConverter = (): JSX.Element => {
   const [quoteCurrency, setQuoteCurrency] = useState<Currency>({ name: 'Euro', code: 'EUR', symbol: '€' });
   const [exchangeRate, setExchangeRate] = useState<ExchangeRate>({ rate: 0, date: new Date() });
   const [availableCurrencies, setAvailableCurrencies] = useState<Array<Currency>>([]);
+  const svgRef = useRef(null);
 
   useEffect(() => {
     getAvailableCurrencies().then((availables) => setAvailableCurrencies(availables));
@@ -46,6 +48,7 @@ const MainConverter = (): JSX.Element => {
 
   const switchCurrs = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    rotateElement(svgRef.current);
     setBaseCurrency(quoteCurrency);
     setQuoteCurrency(baseCurrency);
     updateExchangeRate(quoteCurrency.code, baseCurrency.code);
@@ -80,6 +83,7 @@ const MainConverter = (): JSX.Element => {
             role="img"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
+            ref={svgRef}
           >
             <path
               fill="currentColor"

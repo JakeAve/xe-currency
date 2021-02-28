@@ -49,10 +49,12 @@ const Converter = (props: Props): JSX.Element => {
         <input
           name="base"
           type="number"
+          inputMode="decimal"
           placeholder="0"
           id={identifier + '-base'}
           value={base}
           onChange={onBaseChange}
+          pattern="[0-9]*"
         />
       </div>
       <div className="lg-input-wrapper quote">
@@ -60,15 +62,24 @@ const Converter = (props: Props): JSX.Element => {
         <input
           name="quote"
           type="number"
+          inputMode="decimal"
           placeholder="0"
           id={identifier + '-quote'}
           value={quote}
           onChange={onQuoteChange}
+          pattern="[0-9]*"
         />
       </div>
       <div className="fee">
         <label htmlFor={identifier + '-fee'}>Fee</label>
-        <input name="fee" type="number" step=".01" id={identifier + '-fee'} onChange={onFeeChange} placeholder="0" />
+        <input
+          name="fee"
+          type="number"
+          inputMode="decimal"
+          id={identifier + '-fee'}
+          onChange={onFeeChange}
+          placeholder="0"
+        />
       </div>
       <div className="date">Last updated {makeRelDate(exchangeRate.date)}</div>
     </form>
