@@ -1,8 +1,20 @@
 footer {
-  padding: 5rem 0 1.5rem 0;
+  padding: 5rem 0 2.5rem 0;
+  position: relative;
+  background: transparent;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0.2;
+    background: var(--bg-1);
+  }
 
   @media (min-width: 400px) {
-    padding: 5rem 0 2.5rem 0;
+    padding: 5rem 0 3rem 0;
   }
 }
 

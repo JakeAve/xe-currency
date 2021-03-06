@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "nodemon",
+    "scrape": "node ./build/services/exchangeratesapi/scrape",
     "test:scrape": "npx ts-node --transpile-only src/services/exchangeratesapi/scrape.ts"
   },
   "keywords": [],
