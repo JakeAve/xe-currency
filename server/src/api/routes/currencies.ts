@@ -5,7 +5,7 @@ const router = Router()
 
 router.get('/', async (req, res) => {
   try {
-    const curr = await Currencies.findOne().sort({ created_at: -1 }).exec()
+    const curr = await Currencies.findOne().sort({ date: -1 }).exec()
     const currencies = curr['currencies']
     res.json({ currencies })
   } catch (err) {

@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
     const {
       query: { base, quote },
     } = req
-    const conv = await Conversions.findOne().sort({ created_at: -1 }).exec()
+    const conv = await Conversions.findOne().sort({ date: -1 }).exec()
     const rate = conv['conversions'][`${base}:${quote}`]
     const date = conv['date']
     res.json({ rate, date })
