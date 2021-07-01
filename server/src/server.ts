@@ -1,18 +1,15 @@
-import dotenv from 'dotenv'
-dotenv.config()
+import * as dotenv from 'dotenv'
+dotenv.config({ path: process.env.PWD + '/.env' })
 
 import connectDB from './db/connectDB'
 import express from 'express'
 import api from './api'
 
 connectDB()
-const app = express()
-app.use('/api', api)
 
-app.get('/', (req, res) => {
-  console.log('hitit')
-  res.sendStatus(200)
-})
+const app = express()
+
+app.use('/api', api)
 
 const port = process.env.PORT || 5000
 

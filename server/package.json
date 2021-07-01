@@ -6,8 +6,10 @@
   "scripts": {
     "build": "tsc",
     "dev": "nodemon",
-    "scrape": "node ./build/services/exchangeratesapi/scrape",
-    "test:scrape": "npx ts-node --transpile-only src/services/exchangeratesapi/scrape.ts"
+    "scrape-0": "node ./build/services/exchangeratesapi/scrape",
+    "scrape-1": "node ./build/services/exchangerate-api/scrape",
+    "test:scrape-0": "npx ts-node --transpile-only src/services/exchangeratesapi/scrape.ts",
+    "test:scrape-1": "npx ts-node --transpile-only src/services/exchangerate-api/scrape.ts"
   },
   "keywords": [],
   "author": "Jacob Avery",
