@@ -242,3 +242,10 @@
     }
   }
 }
+
+.is-updating {
+  & input {
+    opacity: 0.2;
+    color: var(--warn);
+  }
+}

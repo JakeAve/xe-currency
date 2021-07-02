@@ -14,7 +14,7 @@ const Selector = (props: Props): JSX.Element => {
 
   const options = availableCurrencies.map(({ code, name }) => (
     <option key={code} value={code}>
-      {name}
+      {code} ({name})
     </option>
   ));
 

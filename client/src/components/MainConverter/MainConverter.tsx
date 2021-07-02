@@ -17,6 +17,7 @@ const MainConverter = (): JSX.Element => {
   const [quoteCurrency, setQuoteCurrency] = useState<Currency>({ name: 'Euro', code: 'EUR', symbol: '€' });
   const [exchangeRate, setExchangeRate] = useState<ExchangeRate>({ rate: 0, date: new Date() });
   const [availableCurrencies, setAvailableCurrencies] = useState<Array<Currency>>([]);
+  const [isUpdatingRate, setIsUpdatingRate] = useState(false);
   const svgRef = useRef(null);
 
   useEffect(() => {
@@ -24,8 +25,10 @@ const MainConverter = (): JSX.Element => {
   }, []);
 
   const updateExchangeRate = async (b: CurrencyCode, q: CurrencyCode) => {
-    const r = await getRate(b, q);
-    setExchangeRate(r);
+    setIsUpdatingRate(true);
+    const { success, data } = await getRate(b, q);
+    if (success) setIsUpdatingRate(false);
+    setExchangeRate(data);
   };
 
   useEffect(() => {
@@ -62,7 +65,7 @@ const MainConverter = (): JSX.Element => {
   };
 
   return (
-    <div className="main-converter">
+    <div className={'main-converter' + (isUpdatingRate ? ' is-updating' : '')}>
       <fieldset className="currency-selection" form={identifier + '-converter-form'}>
         <div className="base-curr selector-wrapper">
           <label htmlFor={identifier + '-base-curr'}>Base Currency</label>
