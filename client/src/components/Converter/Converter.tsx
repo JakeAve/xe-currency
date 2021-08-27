@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import makeRelDate from '../../actions/makeRelDate';
+import { useLanguageContext } from '../../providers/LanguageProvider';
 
 interface Props {
   identifier: string;
@@ -12,6 +13,8 @@ interface Props {
 
 const Converter = (props: Props): JSX.Element => {
   const { identifier = 'main', exchangeRate, baseCurrency, quoteCurrency } = props;
+
+  const { strings: translatedStrings } = useLanguageContext();
 
   const [base, setBase] = useState<number | string>(props.base || 1);
   const [fee, setFee] = useState<number | string>(props.fee || 0);
@@ -71,7 +74,7 @@ const Converter = (props: Props): JSX.Element => {
         />
       </div>
       <div className="fee">
-        <label htmlFor={identifier + '-fee'}>Fee</label>
+        <label htmlFor={identifier + '-fee'}>{translatedStrings.fee}</label>
         <input
           name="fee"
           type="number"
@@ -81,7 +84,9 @@ const Converter = (props: Props): JSX.Element => {
           placeholder="0"
         />
       </div>
-      <div className="date">Last updated {makeRelDate(exchangeRate.date)}</div>
+      <div className="date">
+        {translatedStrings.lastUpdated} {makeRelDate(exchangeRate.date)}
+      </div>
     </form>
   );
 };

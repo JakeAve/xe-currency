@@ -5,6 +5,7 @@ import getAvailableCurrencies from '../../actions/getAvailableCurrencies';
 import Converter from '../Converter/Converter';
 import Selector from '../CurrencySelector/CurrencySelector';
 import rotateElement from '../../actions/rotateElement';
+import { useLanguageContext } from '../../providers/LanguageProvider';
 
 const MainConverter = (): JSX.Element => {
   const identifier = 'main';
@@ -19,10 +20,11 @@ const MainConverter = (): JSX.Element => {
   const [availableCurrencies, setAvailableCurrencies] = useState<Array<Currency>>([]);
   const [isUpdatingRate, setIsUpdatingRate] = useState(false);
   const svgRef = useRef(null);
+  const { currencies: currencyList, strings: translatedStrings } = useLanguageContext();
 
   useEffect(() => {
-    getAvailableCurrencies().then((availables) => setAvailableCurrencies(availables));
-  }, []);
+    getAvailableCurrencies(currencyList).then((availables) => setAvailableCurrencies(availables));
+  }, [translatedStrings]);
 
   const updateExchangeRate = async (b: CurrencyCode, q: CurrencyCode) => {
     setIsUpdatingRate(true);
@@ -68,7 +70,7 @@ const MainConverter = (): JSX.Element => {
     <div className={'main-converter' + (isUpdatingRate ? ' is-updating' : '')}>
       <fieldset className="currency-selection" form={identifier + '-converter-form'}>
         <div className="base-curr selector-wrapper">
-          <label htmlFor={identifier + '-base-curr'}>Base Currency</label>
+          <label htmlFor={identifier + '-base-curr'}>{translatedStrings.baseCurrency}</label>
           <Selector
             id={identifier + '-base-curr'}
             currency={baseCurrency}
@@ -77,7 +79,12 @@ const MainConverter = (): JSX.Element => {
             availableCurrencies={availableCurrencies}
           />
         </div>
-        <button className="switch-btn" aria-label="Switch" title="Switch" onClick={switchCurrs}>
+        <button
+          className="switch-btn"
+          aria-label="Switch"
+          title={translatedStrings.switchCurrencies}
+          onClick={switchCurrs}
+        >
           <svg
             aria-hidden="true"
             focusable="false"
@@ -95,7 +102,7 @@ const MainConverter = (): JSX.Element => {
           </svg>
         </button>
         <div className="quote-curr selector-wrapper">
-          <label htmlFor={identifier + '-quote-curr'}>Quote Currency</label>
+          <label htmlFor={identifier + '-quote-curr'}>{translatedStrings.quoteCurrency}</label>
           <Selector
             id={identifier + '-quote-curr'}
             currency={quoteCurrency}

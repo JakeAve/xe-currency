@@ -1,0 +1,26 @@
+.lang-dialog {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  justify-content: center;
+  align-content: center;
+  gap: 1rem;
+  & label,
+  & select {
+    color: var(--bg-1);
+  }
+  & label {
+    font-size: var(--fs-1);
+    line-height: 2.2rem;
+  }
+  & button {
+    font-size: var(--fs-1);
+    padding: 0.5rem 1rem;
+  }
+  & .lang-select {
+    box-sizing: border-box;
+    font-size: var(--fs-1);
+    padding: 0.2rem;
+    background: transparent;
+    border: none;
+  }
+}

@@ -2,7 +2,7 @@
   --sans-serif: 'Inria Sans', sans-serif;
   --serif: 'Roboto Slab', serif;
   --cc-1: #0f0f0f;
-  --fc-1: #25aa00;
+  --fc-1: #209600;
   --fc-2: #5ac73c;
   --fc-3: #6fcd52;
   --fc-4: #71ee68;
@@ -11,6 +11,7 @@
   --warn: #9c0000;
   --bor-rad: 16px;
   --main-gradient: linear-gradient(49deg, var(--fc-1) 7%, var(--fc-2) 38%, var(--fc-3) 76%, var(--fc-4) 100%);
+  --second-gradient: linear-gradient(-49deg, var(--fc-1) 51%, var(--fc-2) 85%, var(--fc-3) 95%, var(--fc-4) 100%);
   --shadow-1: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(4, 4, 5, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
   --fs-1: 1.4rem;
   --fs-2: 2rem;

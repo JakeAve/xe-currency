@@ -1,11 +1,25 @@
 nav {
   background: var(--fc-1);
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 0.5rem 1rem;
+  @media (min-width: 600px) {
+    padding: 0.5rem 2rem;
+  }
+  & a {
+    color: var(--bg-1);
+  }
   & ul {
     list-style: none;
     margin: 0;
     padding: 0;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  & ul li {
+    display: inline-block;
   }
   & li a {
     color: var(--bg-1);
@@ -21,5 +35,44 @@ nav {
     &:hover::after {
       width: 100%;
     }
+  }
+}
+
+.home-link {
+  font-size: var(--fs-1);
+  margin: 0;
+  font-weight: normal;
+  & a {
+    text-decoration: none;
+  }
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  line-height: 0;
+  & svg,
+  & path {
+    color: var(--bg-1);
+    fill: currentColor;
+  }
+  & svg {
+    height: var(--fs-1);
+  }
+}
+
+.lang-btn {
+  border-radius: var(--bor-rad);
+  padding: 0.5rem 1rem;
+  display: grid;
+  color: var(--bg-1);
+  grid-template-rows: auto auto;
+  justify-content: center;
+  justify-items: center;
+  font-size: 1rem;
+  &:hover,
+  &:focus {
+    background: var(--fc-2);
   }
 }

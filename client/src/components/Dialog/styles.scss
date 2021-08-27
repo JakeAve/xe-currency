@@ -1,0 +1,72 @@
+.dialog-component {
+  display: none;
+  position: fixed;
+  border: none;
+  border-radius: var(--bor-rad);
+  padding: 3rem 2rem 2rem;
+  z-index: 2;
+  background-image: var(--second-gradient);
+  background-color: var(--fc-1);
+  box-shadow: var(--shadow-1);
+  @media (min-width: 768px) {
+    padding: 5rem;
+  }
+}
+
+.dialog-component[open] {
+  display: block;
+  box-sizing: border-box;
+  max-height: 80vh;
+  max-width: 80vw;
+  top: 50vh;
+  transform: translateY(-50%);
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: black;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+.backdrop[data-open='true'] {
+  width: 100vw;
+  height: 100vh;
+}
+
+.dialog-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border-radius: var(--bor-rad);
+  background: var(--fc-1);
+  border: none;
+  padding: 0.5rem;
+  height: 3rem;
+  width: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  & svg {
+    height: 1.2rem;
+    color: var(--bg-1);
+    fill: currentColor;
+    & path {
+      fill: currentColor;
+      color: var(--bg-1);
+    }
+  }
+
+  &:hover,
+  &:focus {
+    background: var(--fc-2);
+  }
+}
+
+.dialog-content {
+  padding: 16px;
+}
