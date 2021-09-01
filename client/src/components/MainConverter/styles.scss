@@ -62,19 +62,7 @@
 }
 
 .switch-btn {
-  border: none;
-  background: transparent;
-  border-radius: var(--bor-rad);
-  font-size: var(--fs-1);
-  padding: 1rem;
-  position: relative;
-  overflow: hidden;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 6rem;
-  cursor: pointer;
+  min-width: 120px;
   & svg {
     fill: var(--cc-1);
     height: var(--fs-1);
@@ -88,27 +76,6 @@
         transform: rotate(-90deg);
       }
     }
-  }
-  &::after {
-    content: '';
-    z-index: -1;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background: var(--bg-1);
-    opacity: 0.4;
-    left: 0;
-    top: 0;
-  }
-  &:hover,
-  &:focus {
-    outline: none;
-    &::after {
-      opacity: 0.8;
-    }
-  }
-  &:active::after {
-    opacity: 1;
   }
 }
 

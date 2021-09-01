@@ -1,7 +1,7 @@
 import './styles.scss';
 import { useLanguageContext } from '../../providers/LanguageProvider';
 import Dialog from '../Dialog/Dialog';
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 import { UseDialogControls } from '../Dialog/hooks/useDialogControls';
 
 interface Props {
@@ -11,6 +11,7 @@ interface Props {
 const LanguageDialog = (props: Props): JSX.Element => {
   const { dialogControls } = props;
   const { strings: translatedStrings, availableLangs, code, setSelectedLang } = useLanguageContext();
+  const [val, setVal] = useState(code);
 
   const options = availableLangs
     .sort(({ code: codeA }, { code: codeB }) => codeA.localeCompare(codeB))
@@ -34,10 +35,10 @@ const LanguageDialog = (props: Props): JSX.Element => {
     <Dialog dialogControls={dialogControls}>
       <form className="lang-dialog" onSubmit={onSubmit}>
         <label>{translatedStrings.langSelect}</label>
-        <select name="lang" className="lang-select" defaultValue={code}>
+        <select name="lang" className="lang-select" value={val} onChange={(e) => setVal(e.target.value)}>
           {options}
         </select>
-        <button>{translatedStrings.submitLangChange}</button>
+        <button className="dank-btn">{translatedStrings.submitLangChange}</button>
       </form>
     </Dialog>
   );

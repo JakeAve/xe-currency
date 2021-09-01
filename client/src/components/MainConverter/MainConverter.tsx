@@ -80,7 +80,7 @@ const MainConverter = (): JSX.Element => {
           />
         </div>
         <button
-          className="switch-btn"
+          className="dank-btn switch-btn"
           aria-label="Switch"
           title={translatedStrings.switchCurrencies}
           onClick={switchCurrs}
