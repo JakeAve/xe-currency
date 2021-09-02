@@ -180,8 +180,8 @@
     & input {
       color: var(--bg-1) !important;
     }
-    & input ::placeholder {
-      color: var(--bg-2);
+    & input::placeholder {
+      color: var(--placeholder-color-focus);
     }
     &::after {
       background: var(--cc-1);
