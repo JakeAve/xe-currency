@@ -1,15 +1,15 @@
 export default [
   {
-    code: 'en_US',
+    code: 'en-US',
     name: 'English (US)',
-    currencies: require('./currencies/en_US.json'),
-    strings: require('./translatedStrings/en_US.json'),
+    currencies: require('./currencies/en-US.json'),
+    strings: require('./translatedStrings/en-US.json'),
   },
   {
-    code: 'en_GB',
+    code: 'en-GB',
     name: 'English (GB)',
-    currencies: require('./currencies/en_GB.json'),
-    strings: require('./translatedStrings/en_GB.json'),
+    currencies: require('./currencies/en-GB.json'),
+    strings: require('./translatedStrings/en-GB.json'),
   },
   {
     code: 'es',

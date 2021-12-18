@@ -1,5 +1,5 @@
 export default {
-  code: 'en_US',
+  code: 'en-US',
   name: 'English (US)',
   currencies: [
     { name: 'Albanian Lek', code: 'ALL', symbol: 'Lek' },
