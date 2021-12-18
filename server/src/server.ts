@@ -11,7 +11,7 @@ const app = express()
 
 app.use('/api', api)
 
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 5500
 
 const server = app.listen(port, () => {
   console.log(`1: Listening on port ${port}`)
