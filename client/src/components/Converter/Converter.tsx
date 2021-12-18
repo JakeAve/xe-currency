@@ -15,7 +15,6 @@ const Converter = (props: Props): JSX.Element => {
   const { identifier = 'main', exchangeRate, baseCurrency, quoteCurrency } = props;
 
   const { strings: translatedStrings, code: locale } = useLanguageContext();
-  console.log(useLanguageContext());
 
   const [base, setBase] = useState<number | string>(props.base || 1);
   const [fee, setFee] = useState<number | string>(props.fee || 0);

@@ -13,8 +13,6 @@ export const getLang = async (code: string): Promise<GetLangResponse> => {
     const lang = await res.json();
     return { success: true, data: { lang } };
   } catch {
-    console.log('defaulting the lang');
-    console.log(defaultLang);
     return { success: false, data: { lang: defaultLang as LanguageInterface } };
   }
 };
