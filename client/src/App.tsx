@@ -13,10 +13,14 @@ const App = (): JSX.Element => {
       <LanguageProvider>
         <>
           <Nav />
-          <Switch>
-            <Route path="/about" exact component={About} />
-            <Route path="/" component={Home} />
-          </Switch>
+          <div className="main-row">
+            <aside />
+            <Switch>
+              <Route path="/about" exact component={About} />
+              <Route path="/" component={Home} />
+            </Switch>
+            <aside />
+          </div>
           <Footer />
         </>
       </LanguageProvider>

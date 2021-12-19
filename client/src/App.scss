@@ -50,7 +50,31 @@ body {
 
 #root {
   overflow-x: hidden;
-  height: 100vh;
+}
+
+.main-row {
+  & aside {
+    color: var(--cc-1);
+    font-size: 0.5rem;
+    text-align: center;
+    margin: 4px;
+    // outline: 1px solid var(--bg-1);
+    &:first-of-type {
+      height: 25px;
+    }
+    &:nth-of-type(2) {
+      height: 200px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    & aside {
+      margin: 8px;
+      height: initial !important;
+    }
+  }
 }
 
 main {
