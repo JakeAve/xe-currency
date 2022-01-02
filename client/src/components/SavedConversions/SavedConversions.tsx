@@ -1,8 +1,8 @@
-import useFavorites from '../../hooks/useFavorites';
+import { useFavoritesContext } from '../../providers/FavoritesProvider';
 import { SingleFavorite } from '../SingleFavorite/SingleFavorite';
 
 export const SavedConversions = (): JSX.Element => {
-  const { favorites } = useFavorites();
+  const { favorites } = useFavoritesContext();
   return (
     <div>
       {favorites.map((favorite) => (

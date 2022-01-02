@@ -2,10 +2,11 @@ import { useState } from 'react';
 import randomID from '../utils/randomID';
 const localStorageKey = 'xe-currency-favorites';
 
-interface UseFavorites {
-  favorites: Favorite[];
+export interface UseFavorites {
   addFavorite: (fav: Partial<Favorite>) => void;
+  favorites: Favorite[];
   removeFavorite: (fav: Favorite) => void;
+  updateFavorite: (fav: Favorite) => void;
 }
 
 const useFavorites = (): UseFavorites => {
@@ -26,10 +27,15 @@ const useFavorites = (): UseFavorites => {
     setFavorites(favorites.filter(({ identifier: _id }) => _id !== identifier));
   };
 
+  const updateFavorite = (fav: Favorite) => {
+    setFavorites(favorites.map((_fav) => (_fav.identifier === fav.identifier ? fav : _fav)));
+  };
+
   return {
-    favorites,
     addFavorite,
+    favorites,
     removeFavorite,
+    updateFavorite,
   };
 };
 

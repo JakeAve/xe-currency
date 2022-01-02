@@ -2,7 +2,7 @@ import { useState, useEffect, MouseEvent, useRef, RefObject } from 'react';
 import getAvailableCurrencies from '../../../actions/getAvailableCurrencies';
 import getRate from '../../../actions/getRate';
 import rotateElement from '../../../actions/rotateElement';
-import useFavorites from '../../../hooks/useFavorites';
+import { useFavoritesContext } from '../../../providers/FavoritesProvider';
 import { useLanguageContext } from '../../../providers/LanguageProvider';
 import { ConverterProps } from '../../Converter/Converter';
 
@@ -39,8 +39,9 @@ const useMainConverter = (): UseMainConverter => {
   const [isUpdatingRate, setIsUpdatingRate] = useState(false);
   const svgRef = useRef(null);
   const { currencies: currencyList, strings: translatedStrings } = useLanguageContext();
-  const { addFavorite } = useFavorites();
   const [currentState, setCurrentState] = useState<ConverterState | null>(null);
+
+  const { addFavorite } = useFavoritesContext();
 
   useEffect(() => {
     getAvailableCurrencies(currencyList).then((availables) => setAvailableCurrencies(availables));
