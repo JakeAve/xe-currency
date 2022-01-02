@@ -1,49 +1,26 @@
-import { useState, useEffect } from 'react';
 import makeRelDate from '../../actions/makeRelDate';
 import { useLanguageContext } from '../../providers/LanguageProvider';
+import useConverter from './hooks/useConverter';
 
-interface Props {
-  identifier: string;
-  baseCurrency: Currency;
-  quoteCurrency: Currency;
+export interface ConverterProps {
+  base?: number;
+  baseCurrency: CurrencyCode;
   exchangeRate: ExchangeRate;
   fee?: number;
-  base?: number;
+  identifier: string;
+  quoteCurrency: CurrencyCode;
+  onStateChange?: (state: ConverterState) => void;
 }
 
-const Converter = (props: Props): JSX.Element => {
-  const { identifier = 'main', exchangeRate, baseCurrency, quoteCurrency } = props;
+const Converter = (props: ConverterProps): JSX.Element => {
+  const { identifier = 'main', baseCurrency, quoteCurrency } = props;
 
-  const { strings: translatedStrings, code: locale } = useLanguageContext();
+  const { code: locale, currencies: currencyList, strings: translatedStrings } = useLanguageContext();
 
-  const [base, setBase] = useState<number | string>(props.base || 1);
-  const [fee, setFee] = useState<number | string>(props.fee || 0);
-  const [quote, setQuote] = useState<number | string>(Number(base) * exchangeRate.rate * (1 + Number(fee)));
-
-  useEffect(() => {
-    setQuote((Number(base) * exchangeRate.rate * (1 + Number(fee))).toFixed(4));
-  }, [exchangeRate]);
-
-  const onBaseChange = (e: { target: HTMLInputElement }) => {
-    const value = e.target.value;
-    setBase(value);
-    setQuote((Number(value) * exchangeRate.rate * (1 + Number(fee))).toFixed(4));
-  };
-
-  const onQuoteChange = (e: { target: HTMLInputElement }) => {
-    const value = e.target.value;
-    setQuote(value);
-    setBase(((Number(value) / exchangeRate.rate) * (1 - Number(fee))).toFixed(4));
-  };
-
-  const onFeeChange = (e: { target: HTMLInputElement }) => {
-    const raw = e.target.value;
-    const value = Number(raw) / 100;
-    setFee(value);
-    setQuote((Number(base) * exchangeRate.rate * (1 + Number(value))).toFixed(4));
-  };
-
-  const displayName = (currency: Currency) => `${currency.code} (${currency.symbol})`;
+  const { base, displayName, exchangeRate, fee, onBaseChange, onFeeChange, onQuoteChange, quote } = useConverter({
+    currencyList,
+    props,
+  });
 
   return (
     <form className={'convert-form' + (Number(fee) > 0 ? ' with-fee' : '')} id={identifier + '-converter-form'}>

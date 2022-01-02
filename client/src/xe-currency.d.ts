@@ -8,6 +8,18 @@ interface Currency {
   code: CurrencyCode;
   symbol: string;
 }
+interface ConverterState {
+  base: number;
+  baseCurrency: CurrencyCode;
+  exchangeRate: ExchangeRate;
+  fee?: number;
+  quoteCurrency: CurrencyCode;
+}
+
+interface Favorite extends ConverterState {
+  identifier: string;
+  label: string;
+}
 
 type CurrencyCode =
   | 'ALL'

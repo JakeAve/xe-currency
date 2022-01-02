@@ -11,13 +11,13 @@ const units: Units = {
   second: 1000,
 };
 interface makeRelDateOptions {
-  d2?: Date;
+  d2?: Date | string;
   locale?: string;
 }
 
-const makeRelDate = (d1: Date, { d2 = new Date(), locale = 'en-US' }: makeRelDateOptions = {}): string => {
+const makeRelDate = (d1: Date | string, { d2 = new Date(), locale = 'en-US' }: makeRelDateOptions = {}): string => {
   const rtf = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' });
-  const elapsed = d1.valueOf() - d2.valueOf();
+  const elapsed = new Date(d1).valueOf() - new Date(d2).valueOf();
   for (const u in units)
     if (Math.abs(elapsed) > units[u] || u === 'second') return rtf.format(Math.round(elapsed / units[u]), u as Unit);
   return '';
