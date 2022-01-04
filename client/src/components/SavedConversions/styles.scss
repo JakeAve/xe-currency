@@ -1,0 +1,10 @@
+.saved-conversions {
+  display: grid;
+  gap: 1rem;
+  @media (min-width: 690px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (min-width: 1200px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}

@@ -9,7 +9,7 @@ export interface UseFavorites {
   addFavorite: (fav: Partial<Favorite>) => void;
   favorites: Favorite[];
   favoritesJSX: JSX.Element;
-  removeFavorite: (fav: Favorite) => void;
+  removeFavorite: (identifier: string) => void;
   updateFavorite: (fav: Favorite) => void;
 }
 
@@ -37,11 +37,11 @@ const useFavorites = (): UseFavorites => {
   };
 
   const addFavorite = (fav: Partial<Favorite>) => {
-    const newFav = { ...fav, id: randomID() } as Favorite;
+    const newFav = { ...fav, identifier: randomID() } as Favorite;
     setFavorites([...favorites, newFav]);
   };
 
-  const removeFavorite = ({ identifier }: Favorite) => {
+  const removeFavorite = (identifier: string) => {
     setFavorites(favorites.filter(({ identifier: _id }) => _id !== identifier));
   };
 

@@ -10,10 +10,10 @@ const Home = (): JSX.Element => {
         <section>
           <MainConverter />
         </section>
-        {/* <section>
+        <section>
           <h2>Saved</h2>
           <SavedConversions />
-        </section> */}
+        </section>
       </main>
     </FavoritesProvider>
   );

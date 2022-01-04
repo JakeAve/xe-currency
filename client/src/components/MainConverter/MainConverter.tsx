@@ -72,9 +72,9 @@ const MainConverter = (): JSX.Element => {
           </div>
         </fieldset>
         <Converter {...converterProps} />
-        {/* <div>
+        <div>
           <button onClick={saveCurrentAsFavorite}>Save</button>
-        </div> */}
+        </div>
       </div>
     </>
   );

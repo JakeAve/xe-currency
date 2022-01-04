@@ -8,31 +8,26 @@
   border-radius: var(--bor-rad);
   box-shadow: var(--shadow-1);
 
+  & .convert-form {
+    grid-template-areas:
+      'b'
+      'q'
+      'f'
+      'd';
+
+    @media (min-width: 810px) {
+      grid-template-areas:
+        'b q'
+        'f f'
+        'd d';
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
   & fieldset {
     border: none;
     padding: 0;
     margin: 0;
-  }
-
-  & label {
-    font-size: var(--fs-1);
-    font-weight: bold;
-  }
-
-  & input {
-    font-family: var(--sans-serif);
-    font-weight: bold;
-    font-size: var(--fs-1);
-    border: none;
-    text-align: center;
-
-    &[type='number']::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-    }
-
-    &::placeholder {
-      color: var(--fc-1);
-    }
   }
 
   & select {
@@ -86,127 +81,6 @@
   justify-content: center;
   & label {
     font-size: var(--fs-1);
-  }
-}
-
-.main-converter {
-  & .convert-form {
-    display: grid;
-    justify-content: space-around;
-    gap: 1rem;
-    grid-template-areas:
-      'b'
-      'q'
-      'f'
-      'd';
-
-    @media (min-width: 810px) {
-      grid-template-areas:
-        'b q'
-        'f f'
-        'd d';
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  & .base {
-    grid-area: b;
-  }
-  & .quote {
-    grid-area: q;
-  }
-  & .fee,
-  & .date {
-    padding: 0.5rem;
-    font-size: var(--fs-1);
-  }
-  & .fee {
-    grid-area: f;
-    justify-self: center;
-    border-radius: var(--bor-rad);
-    padding: 0.8rem;
-    & input {
-      width: 3rem;
-      letter-spacing: 0.1rem;
-      margin: 0 0.2rem;
-      background: transparent;
-    }
-    &::after {
-      content: '%';
-    }
-    &:focus-within {
-      background: var(--warn);
-      & input {
-        background: var(--warn);
-        outline: none;
-        &::placeholder {
-          color: var(--bg-1);
-        }
-      }
-      & label,
-      & input,
-      &::after {
-        color: var(--bg-1);
-      }
-    }
-  }
-  & .date {
-    grid-area: d;
-    justify-self: center;
-    text-align: center;
-    padding: 0.8rem;
-  }
-}
-
-.lg-input-wrapper {
-  display: grid;
-  justify-content: center;
-  grid-template-rows: auto 1fr;
-  gap: 0.5rem;
-  padding: 1.2rem;
-  border-radius: var(--bor-rad);
-  position: relative;
-  overflow: hidden;
-  & input {
-    font-size: var(--fs-2);
-    background: transparent;
-    &:focus {
-      border: none;
-      outline: none;
-    }
-  }
-  &:focus-within {
-    & label,
-    & input {
-      color: var(--bg-1) !important;
-    }
-    & input::placeholder {
-      color: var(--placeholder-color-focus);
-    }
-    &::after {
-      background: var(--cc-1);
-    }
-  }
-  &::after {
-    content: '';
-    z-index: -1;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background: var(--bg-1);
-    opacity: 0.4;
-  }
-}
-
-.with-fee {
-  & .quote,
-  & .fee {
-    & label,
-    & input,
-    &::after {
-      color: var(--warn);
-      font-style: italic;
-    }
   }
 }
 

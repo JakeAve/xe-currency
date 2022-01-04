@@ -1,3 +1,4 @@
+import './styles.scss';
 import makeRelDate from '../../actions/makeRelDate';
 import { useLanguageContext } from '../../providers/LanguageProvider';
 import useConverter from './hooks/useConverter';
@@ -25,8 +26,11 @@ const Converter = (props: ConverterProps): JSX.Element => {
   return (
     <form className={'convert-form' + (Number(fee) > 0 ? ' with-fee' : '')} id={identifier + '-converter-form'}>
       <div className="lg-input-wrapper base">
-        <label htmlFor={identifier + '-base'}>{displayName(baseCurrency)}</label>
+        <label className="input-label" htmlFor={identifier + '-base'}>
+          {displayName(baseCurrency)}
+        </label>
         <input
+          className="converter-input"
           name="base"
           type="number"
           inputMode="decimal"
@@ -38,8 +42,11 @@ const Converter = (props: ConverterProps): JSX.Element => {
         />
       </div>
       <div className="lg-input-wrapper quote">
-        <label htmlFor={identifier + '-quote'}>{displayName(quoteCurrency)}</label>
+        <label className="input-label" htmlFor={identifier + '-quote'}>
+          {displayName(quoteCurrency)}
+        </label>
         <input
+          className="converter-input"
           name="quote"
           type="number"
           inputMode="decimal"
@@ -51,8 +58,11 @@ const Converter = (props: ConverterProps): JSX.Element => {
         />
       </div>
       <div className="fee">
-        <label htmlFor={identifier + '-fee'}>{translatedStrings.fee}</label>
+        <label className="input-label" htmlFor={identifier + '-fee'}>
+          {translatedStrings.fee}
+        </label>
         <input
+          className="fee-input"
           name="fee"
           type="number"
           inputMode="decimal"

@@ -1,0 +1,138 @@
+.convert-form {
+  display: grid;
+  justify-content: space-around;
+  gap: 1rem;
+
+  grid-template-areas:
+    'b'
+    'q'
+    'f'
+    'd';
+
+  & .input-label {
+    font-size: var(--fs-1);
+    font-weight: bold;
+  }
+
+  & .base {
+    grid-area: b;
+  }
+  & .quote {
+    grid-area: q;
+  }
+  & .fee,
+  & .date {
+    padding: 0.5rem;
+    font-size: var(--fs-1);
+  }
+  & .fee {
+    grid-area: f;
+    justify-self: center;
+    border-radius: var(--bor-rad);
+    padding: 0.8rem;
+    &::after {
+      content: '%';
+    }
+    &:focus-within {
+      background: var(--warn);
+      & .converter-input,
+      & .fee-input {
+        background: var(--warn);
+        outline: none;
+        &::placeholder {
+          color: var(--bg-1);
+        }
+      }
+      & .input-label,
+      & .fee-input,
+      &::after {
+        color: var(--bg-1);
+      }
+    }
+  }
+
+  & .date {
+    grid-area: d;
+    justify-self: center;
+    text-align: center;
+    padding: 0.8rem;
+  }
+}
+
+.lg-input-wrapper {
+  display: grid;
+  justify-content: center;
+  grid-template-rows: auto 1fr;
+  gap: 0.5rem;
+  padding: 1.2rem;
+  border-radius: var(--bor-rad);
+  position: relative;
+  overflow: hidden;
+  &:focus-within {
+    & .input-label,
+    & .converter-input {
+      color: var(--bg-1) !important;
+    }
+    & .converter-input::placeholder {
+      color: var(--placeholder-color-focus);
+    }
+    &::after {
+      background: var(--cc-1);
+    }
+  }
+  &::after {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: var(--bg-1);
+    opacity: 0.4;
+  }
+}
+
+.converter-input,
+.fee-input {
+  font-family: var(--sans-serif);
+  font-weight: bold;
+  font-size: var(--fs-1);
+  border: none;
+  text-align: center;
+
+  &[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
+  &::placeholder {
+    color: var(--fc-1);
+  }
+}
+
+.converter-input {
+  font-size: var(--fs-2);
+  background: transparent;
+  &:focus {
+    border: none;
+    outline: none;
+  }
+}
+
+.fee-input {
+  width: 3rem;
+  letter-spacing: 0.1rem;
+  margin: 0 0.2rem;
+  background: transparent;
+}
+
+.with-fee {
+  & .quote,
+  & .fee {
+    & .input-label,
+    & .converter-input,
+    & .fee-input,
+    &::after {
+      color: var(--warn);
+      font-style: italic;
+    }
+  }
+}

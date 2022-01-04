@@ -1,0 +1,54 @@
+.favorite {
+  display: grid;
+  gap: 1rem;
+  background-image: var(--second-gradient);
+  padding: 1rem;
+  border-radius: var(--bor-rad);
+  box-shadow: var(--shadow-1);
+  -webkit-backdrop-filter: blur(90px) brightness(80%);
+  backdrop-filter: blur(90px) brightness(80%);
+
+  & .convert-form {
+    gap: 0.5rem;
+  }
+
+  &-heading {
+    margin: 0;
+    color: var(--bg-1);
+    font-size: var(--fs-1);
+  }
+
+  & .input-label,
+  & .converter-input,
+  & .fee,
+  & .fee-input,
+  & .date {
+    color: var(--bg-1);
+    font-size: var(--fs-1);
+  }
+
+  & .date,
+  & .fee,
+  & .fee-input,
+  & .fee .input-label {
+    font-size: var(--fs-0);
+  }
+
+  & .date,
+  & .fee,
+  & .lg-input-wrapper {
+    padding: 0.5rem;
+  }
+
+  & .lg-input-wrapper {
+    &::after {
+      background-color: var(--cc-1);
+      opacity: 0.3;
+    }
+    &:focus-within {
+      &::after {
+        opacity: 0.6;
+      }
+    }
+  }
+}
