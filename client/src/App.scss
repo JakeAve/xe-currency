@@ -1,14 +1,6 @@
 :root {
   --sans-serif: 'Inria Sans', sans-serif;
   --serif: 'Roboto Slab', serif;
-  // --cc-1: #dddddd;
-  // --fc-1: #000000;
-  // --fc-2: #252525;
-  // --fc-3: #414141;
-  // --fc-4: #5c5c5c;
-  // --bg-1: #e7e7e7;
-  // --placeholder-color-focus: #505050;
-  // --warn: #fca758;
   --cc-1: #0f0f0f;
   --fc-1: #209600;
   --fc-2: #5ac73c;
@@ -17,6 +9,18 @@
   --bg-1: #f5f5f5;
   --placeholder-color-focus: #acacac;
   --warn: #9c0000;
+  // @media (prefers-color-scheme: dark) {
+  //   --cc-1: #dddddd;
+  //   --fc-1: #000000;
+  //   --fc-2: #252525;
+  //   --fc-3: #414141;
+  //   --fc-4: #5c5c5c;
+  //   --bg-1: #e7e7e7;
+  //   --placeholder-color-focus: #505050;
+  //   --warn: #fca758;
+  //   --shadow-1: rgba(107, 107, 107, 0.1) 0px 1px 0px, rgba(105, 105, 105, 0.1) 0px 8px 24px,
+  //     rgba(97, 97, 97, 0.1) 0px 16px 48px;
+  // }
 
   --bor-rad: 16px;
   --main-gradient: linear-gradient(49deg, var(--fc-1) 7%, var(--fc-2) 38%, var(--fc-3) 76%, var(--fc-4) 100%);
@@ -42,6 +46,15 @@ body {
   min-height: 100vh;
   background-image: var(--main-gradient);
   background-color: var(--fc-1);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  // margin: 0;
 }
 
 * {
@@ -122,5 +135,31 @@ main {
   }
   &:active::after {
     opacity: 1;
+  }
+  & .icon {
+    height: var(--fs-1);
+    width: var(--fs-1);
+    color: currentColor;
+    & svg,
+    & path {
+      color: currentColor;
+    }
+  }
+  &.little {
+    font-size: var(--fs-0);
+    font-weight: normal;
+    padding: 0.5rem;
+    & .icon {
+      height: var(--fs-0);
+      width: var(--fs-0);
+    }
+  }
+  &.warning {
+    &:hover,
+    &:focus {
+      &::after {
+        background: var(--warn);
+      }
+    }
   }
 }
