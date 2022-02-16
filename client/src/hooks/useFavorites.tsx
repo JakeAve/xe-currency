@@ -13,26 +13,57 @@ export interface UseFavorites {
   updateFavorite: (fav: Favorite) => void;
 }
 
-// this might be redundant because of what is happening in favoritesJSX
+interface MiniFavorite {
+  // minifiy for localStorage
+  id: string;
+  l: string;
+  b: number;
+  bc: string;
+  qc: string;
+  r: ExchangeRate;
+  f: number;
+}
+
+const minifiedToReadable = (mini: MiniFavorite): Favorite => ({
+  identifier: mini.id,
+  label: mini.l,
+  base: mini.b,
+  baseCurrency: mini.bc as CurrencyCode,
+  fee: mini.f,
+  quoteCurrency: mini.qc as CurrencyCode,
+  exchangeRate: mini.r,
+});
+
+const readableToMinified = (fav: Favorite): MiniFavorite => ({
+  id: fav.identifier,
+  l: fav.label,
+  b: fav.base,
+  bc: fav.baseCurrency,
+  qc: fav.quoteCurrency,
+  r: fav.exchangeRate,
+  f: fav.fee || 0,
+});
+
 const getFavesFromLocalStorage = () => {
   const stringedFavorites = localStorage.getItem(localStorageKey) || '[]';
-  let defaultFavs: Favorite[] = [];
+  let defaultFavs: MiniFavorite[] = [];
   try {
+    // this might be redundant because of error catching in favoritesJSX
     const attempt = JSON.parse(stringedFavorites);
     if (!Array.isArray(attempt)) throw new Error('Favorites are not an array');
     defaultFavs = attempt;
   } catch {
     resetLocalStorage();
   }
-
-  return defaultFavs;
+  return defaultFavs.map(minifiedToReadable);
 };
 
 const useFavorites = (): UseFavorites => {
   const [favorites, _setFavorites] = useState<Favorite[]>(getFavesFromLocalStorage());
 
   const setFavorites = (favorites: Favorite[]) => {
-    localStorage.setItem(localStorageKey, JSON.stringify(favorites));
+    const minified = favorites.map(readableToMinified);
+    localStorage.setItem(localStorageKey, JSON.stringify(minified));
     _setFavorites(favorites);
   };
 
