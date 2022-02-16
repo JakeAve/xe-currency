@@ -69,6 +69,7 @@ const Converter = (props: ConverterProps): JSX.Element => {
           id={identifier + '-fee'}
           onChange={onFeeChange}
           placeholder="0"
+          value={Number(fee) * 100 || ''}
         />
       </div>
       <div className="date">

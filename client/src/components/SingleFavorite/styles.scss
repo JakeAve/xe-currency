@@ -8,14 +8,42 @@
   -webkit-backdrop-filter: blur(90px) brightness(80%);
   backdrop-filter: blur(90px) brightness(80%);
 
-  & .convert-form {
-    gap: 0.5rem;
+  & .label-container {
+    position: relative;
+    &.editing {
+      & .hidden-input {
+        opacity: 1;
+      }
+      & .favorite-heading {
+        opacity: 0;
+      }
+    }
+  }
+
+  & .hidden-input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    padding: 0;
+    background: transparent;
+  }
+
+  &-heading,
+  .hidden-input {
+    color: var(--bg-1);
+    font-size: var(--fs-1);
   }
 
   &-heading {
     margin: 0;
-    color: var(--bg-1);
-    font-size: var(--fs-1);
+  }
+
+  & .convert-form {
+    gap: 0.5rem;
   }
 
   & .input-label,

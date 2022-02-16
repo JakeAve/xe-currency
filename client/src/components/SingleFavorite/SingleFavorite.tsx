@@ -1,14 +1,39 @@
 import './styles.scss';
 import { useFavoritesContext } from '../../providers/FavoritesProvider';
 import Converter from '../Converter/Converter';
+import { useEffect, useState } from 'react';
 
 export const SingleFavorite = (props: Favorite): JSX.Element => {
-  const { label, identifier } = props;
-  const { removeFavorite } = useFavoritesContext();
+  const { identifier } = props;
+  const { removeFavorite, updateFavorite } = useFavoritesContext();
+  const [favorite, _setFavorite] = useState(props);
+  const setFavorite = (value: Partial<Favorite>) => {
+    _setFavorite((curr) => ({ ...curr, ...value, identifier }));
+  };
+  const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    updateFavorite(favorite);
+  }, [favorite]);
+
+  const { label } = favorite;
   return (
     <div className="favorite">
-      <h3 className="favorite-heading">{label}</h3>
-      <Converter {...props} />
+      <div className={`label-container` + (isEditing ? ' editing' : '')}>
+        <input
+          className="hidden-input"
+          type="text"
+          value={label}
+          onChange={(e) => setFavorite({ label: e.target.value })}
+          aria-labelledby={`heading-${identifier}`}
+          onFocus={() => setIsEditing(true)}
+          onBlur={() => setIsEditing(false)}
+        />
+        <h3 className="favorite-heading" id={`heading-${identifier}`}>
+          {label || `${favorite.baseCurrency} / ${favorite.quoteCurrency}`}
+        </h3>
+      </div>
+      <Converter onStateChange={setFavorite} {...props} />
       <div className="favorites-options">
         <button className="dank-btn little warning" onClick={() => removeFavorite(identifier)}>
           <svg

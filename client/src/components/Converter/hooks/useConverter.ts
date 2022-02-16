@@ -15,6 +15,7 @@ interface UseConverter {
   onFeeChange: (e: { target: HTMLInputElement }) => void;
   onQuoteChange: (e: { target: HTMLInputElement }) => void;
   quote: number | string;
+  onStateChange?: (state: ConverterState) => void;
 }
 
 const useConverter = ({ currencyList, props }: UseConverterProps): UseConverter => {
