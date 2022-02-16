@@ -59,7 +59,11 @@ export const LanguageProvider = (props: Props): JSX.Element => {
   const { getParam, setParam } = useQuery();
   const [selectedLang, setSelectedLang] = useState<string>(getParam('lang') || defaultSelectedLang.code);
   const [availableLangs, setAvailableLangs] = useState<AvailableLang[]>([defaultSelectedLang]);
-  const [lang, setLang] = useState<LanguageInterface>(defaultLang as LanguageInterface);
+  const [lang, _setLang] = useState<LanguageInterface>(defaultLang as LanguageInterface);
+  const setLang = (lang: LanguageInterface): void => {
+    _setLang(lang);
+    document.documentElement.setAttribute('lang', lang.code);
+  };
 
   useEffect(() => {
     getAvailableLangs()
