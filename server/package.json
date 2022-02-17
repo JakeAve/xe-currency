@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
+    "deploy": "npm run build && pm2 startOrRestart ./build/server.js --name xe-api",
     "dev": "nodemon",
     "scrape-0": "node ./build/services/exchangeratesapi/scrape",
     "scrape-1": "node ./build/services/exchangerate-api/scrape",
