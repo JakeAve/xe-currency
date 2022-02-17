@@ -5,6 +5,7 @@ module.exports = {
       name: 'scraper',
       cron_restart: '0 0 * * *',
       script: 'npm run scrape-1',
+      autorestart: false,
     },
   ],
 }
