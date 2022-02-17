@@ -72,7 +72,7 @@ const MainConverter = (): JSX.Element => {
           </div>
         </fieldset>
         <Converter {...converterProps} />
-        <div>
+        <div className="main-converter-btn-group">
           <button className="dank-btn little" onClick={saveCurrentAsFavorite}>
             <svg
               aria-hidden="true"

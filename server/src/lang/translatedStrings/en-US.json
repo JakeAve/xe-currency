@@ -2,7 +2,7 @@
   "baseCurrency": "Base Currency",
   "quoteCurrency": "Quote Currency",
   "fee": "Fee",
-  "lastUpdated": "Last updated",
+  "lastUpdated": "Rate updated",
   "switchCurrencies": "Switch currencies",
   "aboutTitle": "About XE Currency",
   "aboutText": "XE Currency is a Progressive Web App (PWA) that aims to help people convert currencies. Conversions are intermittently saved to your web browser, so if you're traveling or have no internet connection, you should still be able to see the last conversion rate.",
