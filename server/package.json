@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "deploy": "npm run build && pm2 startOrRestart ./build/server.js --name xe-api",
+    "deploy": "npm run build && pm2 startOrRestart ecosystem.config.js",
     "dev": "nodemon",
     "scrape-0": "node ./build/services/exchangeratesapi/scrape",
     "scrape-1": "node ./build/services/exchangerate-api/scrape",
+    "start": "node ./build/server.js",
     "test:scrape-0": "npx ts-node --transpile-only src/services/exchangeratesapi/scrape.ts",
     "test:scrape-1": "npx ts-node --transpile-only src/services/exchangerate-api/scrape.ts"
   },
@@ -31,6 +32,7 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.13.5"
+    "mongoose": "^5.13.5",
+    "pm2": "^5.1.2"
   }
 }
