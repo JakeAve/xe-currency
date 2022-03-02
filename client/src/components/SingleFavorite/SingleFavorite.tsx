@@ -2,12 +2,14 @@ import './styles.scss';
 import { useFavoritesContext } from '../../providers/FavoritesProvider';
 import Converter from '../Converter/Converter';
 import { useEffect, useState } from 'react';
+import { useUpdateExchangeRate } from './hooks/useUpdateExchangeRate';
+export type SetFavoriteType = (value: Partial<Favorite>) => void;
 
 export const SingleFavorite = (props: Favorite): JSX.Element => {
   const { identifier } = props;
   const { removeFavorite, updateFavorite } = useFavoritesContext();
   const [favorite, _setFavorite] = useState(props);
-  const setFavorite = (value: Partial<Favorite>) => {
+  const setFavorite: SetFavoriteType = (value) => {
     _setFavorite((curr) => ({ ...curr, ...value, identifier }));
   };
   const [isEditing, setIsEditing] = useState(false);
@@ -15,6 +17,8 @@ export const SingleFavorite = (props: Favorite): JSX.Element => {
   useEffect(() => {
     updateFavorite(favorite);
   }, [favorite]);
+
+  useUpdateExchangeRate(favorite, setFavorite);
 
   const { label } = favorite;
   return (
