@@ -11,7 +11,6 @@ const Home = (): JSX.Element => {
           <MainConverter />
         </section>
         <section>
-          <h2>Saved</h2>
           <SavedConversions />
         </section>
       </main>
