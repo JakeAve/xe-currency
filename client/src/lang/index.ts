@@ -155,5 +155,6 @@ export default {
     langSelect: 'Choose a language',
     submitLangChange: 'Ok',
     close: 'Close',
+    savedCurrenciesTitle: 'Saved currencies',
   },
 };

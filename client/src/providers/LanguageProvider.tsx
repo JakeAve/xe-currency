@@ -31,6 +31,7 @@ interface TranslatedStrings {
   langSelect: string;
   submitLangChange: string;
   close: string;
+  savedCurrenciesTitle: string;
 }
 
 interface LanguageContext {

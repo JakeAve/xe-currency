@@ -11,5 +11,6 @@
   "langButton": "Cambiar idioma",
   "langSelect": "Seleccione un idioma",
   "submitLangChange": "Cambiar",
-  "close": "Cerrar"
+  "close": "Cerrar",
+  "savedCurrenciesTitle": "Intercambios guardados"
 }

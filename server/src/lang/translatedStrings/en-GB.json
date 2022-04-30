@@ -11,5 +11,6 @@
   "langButton": "Change language",
   "langSelect": "Choose a language",
   "submitLangChange": "Ok",
-  "close": "Close"
+  "close": "Close",
+  "savedCurrenciesTitle": "Saved currencies"
 }
