@@ -7,6 +7,7 @@
     "build": "tsc",
     "deploy": "npm run build && pm2 startOrRestart ecosystem.config.js",
     "dev": "nodemon",
+    "gen:lang": "npx ts-node src/utilities/generateLang.ts",
     "scrape-0": "node ./build/services/exchangeratesapi/scrape",
     "scrape-1": "node ./build/services/exchangerate-api/scrape",
     "start": "node ./build/server.js",

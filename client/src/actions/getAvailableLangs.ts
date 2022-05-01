@@ -1,5 +1,5 @@
 import { AvailableLang } from '../providers/LanguageProvider';
-import defaultLang from '../lang';
+import defaultLang from '../lang/default-lang.gen.json';
 
 interface AvailableLangsResponse {
   success: boolean;

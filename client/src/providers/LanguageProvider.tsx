@@ -2,7 +2,7 @@ import { createContext, Dispatch, SetStateAction, useContext, useEffect, useStat
 import { getAvailableLangs } from '../actions/getAvailableLangs';
 import { getLang } from '../actions/getLang';
 import useQuery from '../hooks/useQuery';
-import defaultLang from '../lang';
+import defaultLang from '../lang/default-lang.gen.json';
 const defaultSelectedLang = { name: defaultLang.name, code: defaultLang.code };
 
 export interface AvailableLang {
