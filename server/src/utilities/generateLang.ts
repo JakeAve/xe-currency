@@ -11,6 +11,7 @@ const rawStrings = fs.readFileSync(
 )
 const strings = JSON.parse(rawStrings)
 
+// JSON file
 const lang = {
   code: 'en-US',
   name: 'English (US)',
@@ -24,3 +25,15 @@ fs.writeFileSync(
 )
 
 console.log('Generated file in ../client/src/lang/default-lang.gen.json 🎊 🎉')
+
+// TS file
+const langTS = `
+export interface TranslatedStrings {
+  ${Object.keys(strings)
+    .map((key) => `${key}: string;`)
+    .join('\n  ')}
+}`
+
+fs.writeFileSync('../client/src/lang/default-lang.gen.ts', langTS)
+
+console.log('Generated file in ../client/src/lang/default-lang.gen.ts 🎊 🎉')
