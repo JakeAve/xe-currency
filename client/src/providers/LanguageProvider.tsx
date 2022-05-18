@@ -3,6 +3,7 @@ import { getAvailableLangs } from '../actions/getAvailableLangs';
 import { getLang } from '../actions/getLang';
 import useQuery from '../hooks/useQuery';
 import defaultLang from '../lang/default-lang.gen.json';
+import { TranslatedStrings } from '../lang/default-lang.gen';
 const defaultSelectedLang = { name: defaultLang.name, code: defaultLang.code };
 
 export interface AvailableLang {
@@ -17,23 +18,6 @@ export interface LanguageInterface {
   strings: TranslatedStrings;
 }
 
-interface TranslatedStrings {
-  about: string;
-  baseCurrency: string;
-  quoteCurrency: string;
-  fee: string;
-  lastUpdated: string;
-  switchCurrencies: string;
-  aboutTitle: string;
-  aboutText: string;
-  title: string;
-  langButton: string;
-  langSelect: string;
-  submitLangChange: string;
-  close: string;
-  savedCurrenciesTitle: string;
-}
-
 interface LanguageContext {
   setSelectedLang: Dispatch<SetStateAction<string>> | (() => void);
   strings: TranslatedStrings;
@@ -41,11 +25,15 @@ interface LanguageContext {
   currencies: Currency[];
   code: string;
   name: string;
+  codeToCurrency: (code: CurrencyCode) => Currency;
 }
 
 const languageContext = createContext<LanguageContext>({
   setSelectedLang: () => {
     /* noop */
+  },
+  codeToCurrency(code) {
+    throw new Error('codeToCurrency not implemented');
   },
   ...(defaultLang as LanguageInterface),
   availableLangs: [defaultSelectedLang],
@@ -64,6 +52,11 @@ export const LanguageProvider = (props: Props): JSX.Element => {
   const setLang = (lang: LanguageInterface): void => {
     _setLang(lang);
     document.documentElement.setAttribute('lang', lang.code);
+  };
+  const codeToCurrency = (code: CurrencyCode): Currency => {
+    const curr = lang.currencies.find((currency) => currency.code === code);
+    if (!curr) return { code, symbol: '', name: code };
+    return curr;
   };
 
   useEffect(() => {
@@ -85,7 +78,9 @@ export const LanguageProvider = (props: Props): JSX.Element => {
   }, [selectedLang]);
 
   return (
-    <languageContext.Provider value={{ setSelectedLang, availableLangs, ...lang }}>{children}</languageContext.Provider>
+    <languageContext.Provider value={{ setSelectedLang, availableLangs, codeToCurrency, ...lang }}>
+      {children}
+    </languageContext.Provider>
   );
 };
 

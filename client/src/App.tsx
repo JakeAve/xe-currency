@@ -6,6 +6,7 @@ import Footer from './components/Footer/Footer';
 import Home from './views/Home/Home';
 import About from './views/About/About';
 import { LanguageProvider } from './providers/LanguageProvider';
+import AllConversions from './views/AllConversions/AllConversions';
 
 const App = (): JSX.Element => {
   return (
@@ -17,7 +18,9 @@ const App = (): JSX.Element => {
             <aside />
             <Switch>
               <Route path="/about" exact component={About} />
+              <Route path="/all-conversions" exact component={AllConversions} />
               <Route path="/" component={Home} />
+              <Route path="*" component={Home} />
             </Switch>
             <aside />
           </div>

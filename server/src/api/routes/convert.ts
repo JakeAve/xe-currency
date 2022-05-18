@@ -18,4 +18,16 @@ router.get('/', async (req, res) => {
   }
 })
 
+router.get('/all', async (req, res) => {
+  try {
+    const conv = await Conversions.findOne().sort({ date: -1 }).exec()
+    const rates = conv['conversions']
+    const date = conv['date']
+    res.json({ rates, date })
+  } catch (err) {
+    console.error(err)
+    res.sendStatus(500)
+  }
+})
+
 export default router

@@ -19,6 +19,9 @@ const Home = (): JSX.Element => {
             </h1>
           </li>
           <li>
+            <Link to="/all-conversions">{translatedStrings.allConversions}</Link>
+          </li>
+          <li>
             <Link to="/about">{translatedStrings.about}</Link>
           </li>
         </ul>
