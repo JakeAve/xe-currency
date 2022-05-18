@@ -81,7 +81,6 @@ const useMainConverter = (): UseMainConverter => {
   };
 
   const saveCurrentAsFavorite = () => {
-    console.log('saveCurrentAsFavorite');
     addFavorite({
       label: `${baseCurrency.name} / ${quoteCurrency.name}`,
       ...currentState,
